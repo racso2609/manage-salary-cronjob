@@ -1,3 +1,4 @@
+import dotenv = require('dotenv');
 import { createExpense } from 'src/utils/binance';
 import { getMontshToUpdate } from 'src/utils/time';
 dotenv.config();
