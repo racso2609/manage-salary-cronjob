@@ -1,4 +1,4 @@
-import { createExpense } from 'src/utils/binance';
+import { createExpense } from '../utils/binance';
 
 function main() {
     const url = 'sapi/v1/c2c/orderMatch/listUserOrderHistory';

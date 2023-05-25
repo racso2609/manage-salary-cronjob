@@ -1,7 +1,7 @@
 import axios from 'axios';
 import * as dotenv from 'dotenv';
 import { generateSignature } from '../binance/utils';
-import { Order } from 'src/interface/orders';
+import { Order } from '../interface/orders';
 dotenv.config();
 
 const HOST_BINANCE = process.env.BINANCE_HOST;
