@@ -5,7 +5,7 @@ import { Order } from 'src/interface/orders';
 dotenv.config();
 
 const HOST_BINANCE = process.env.BINANCE_HOST;
-const HOST = 'http://localhost:3001';
+const HOST = process.env.HOST;
 
 export const createExpense = async (url, query) => {
     const signature = generateSignature(query, process.env.BINANCE_SECRET_KEY);
