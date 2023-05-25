@@ -1,8 +1,8 @@
 {
     "crons": [
         {
-            "path": "./dist/binance/index.js",
-            "schedule": "* */12 * * *"
+            "path": "/dist/binance/index.js",
+            "schedule": "0 7 * * *"
         }
     ]
 }
