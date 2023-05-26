@@ -1,4 +1,3 @@
-
 export const getMontshToUpdate = () => {
     const actualDate = new Date();
     const monthsToUpdate = new Array(actualDate.getMonth()).fill('a');
