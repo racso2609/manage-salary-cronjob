@@ -1,6 +1,6 @@
 export const getMontshToUpdate = () => {
     const actualDate = new Date();
-    const monthsToUpdate = new Array(actualDate.getMonth()).fill('a');
+    const monthsToUpdate = new Array(actualDate.getMonth() + 1).fill('a');
     return monthsToUpdate.map((_, index) => {
         const startDate = new Date();
         startDate.setMonth(index);

@@ -76,28 +76,30 @@ export const createEntries = async (url, query) => {
             date: expense.transactionTime,
             total: '',
         }));
-
+console.log(expenses)
     const API_KEY = 'ApiKey ' + process.env.API_KEY;
-    console.log(entries);
-    try {
-        await axios.post(
-            `${HOST}/api/expenses/external/json`,
-            { expenses },
-            { headers: { Authorization: API_KEY } }
-        );
-    } catch (error) {
-        console.log(error?.response?.data?.message);
-        console.log('fail expenses add');
+    if (expenses.length) {
+        try {
+            await axios.post(
+                `${HOST}/api/expenses/external/json`,
+                { expenses },
+                { headers: { Authorization: API_KEY } }
+            );
+        } catch (error) {
+            console.log(error?.response?.data?.message);
+            console.log('fail expenses add');
+        }
     }
 
-    try {
-        await axios.post(
-            `${HOST}/api/entries/external/json`,
-            { entries },
-            { headers: { Authorization: API_KEY } }
-        );
-    } catch (error) {
-        console.log(error?.response?.data?.message);
-        console.log('fail entries add');
+    if (entries.length) {
+        try {
+            await axios.post(
+                `${HOST}/api/entries/external/json`,
+                { entries },
+                { headers: { Authorization: API_KEY } }
+            );
+        } catch (error) {
+            console.log('fail entries add');
+        }
     }
 };
