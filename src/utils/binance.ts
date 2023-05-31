@@ -39,6 +39,10 @@ export const createExpense = async (url, query) => {
         console.log(error?.response?.data?.message);
         console.log('failed to create expenses');
     }
+    // console.log(
+    //     'expenses from p2p',
+    //     expenses.map((order) => order.orderId)
+    // );
 };
 
 export const createEntries = async (url, query) => {
@@ -76,7 +80,6 @@ export const createEntries = async (url, query) => {
             date: expense.transactionTime,
             total: '',
         }));
-console.log(expenses)
     const API_KEY = 'ApiKey ' + process.env.API_KEY;
     if (expenses.length) {
         try {
@@ -99,7 +102,16 @@ console.log(expenses)
                 { headers: { Authorization: API_KEY } }
             );
         } catch (error) {
+            console.log(error?.response?.data?.message);
             console.log('fail entries add');
         }
     }
+    // console.log(
+    //     'expenses from c2c',
+    //     expenses.map((order) => order.orderId)
+    // );
+    // console.log(
+    //     'entries from c2c',
+    //     entries.map((order) => order.orderId)
+    // );
 };
