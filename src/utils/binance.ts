@@ -7,16 +7,16 @@ dotenv.config();
 const HOST_BINANCE = process.env.BINANCE_HOST;
 const HOST = process.env.HOST;
 
-export const createExpense = async (url, query) => {
+export const createExpense = async (url: string, query: string) => {
     const signature = generateSignature(query, process.env.BINANCE_SECRET_KEY);
     const request = await axios.get(
         `${HOST_BINANCE}/${url}?${query}&signature=${signature}`,
-        { headers: { 'X-MBX-APIKEY': process.env.BINANCE_API_KEY } }
+        { headers: { 'X-MBX-APIKEY': process.env.BINANCE_API_KEY } },
     );
-    const expenses: Order[] = request.data.data
+    const expenses: Order[] = request?.data?.data
         .flat()
-        .filter((order) => order.orderStatus === 'COMPLETED')
-        .map((expense) => ({
+        .filter((order: any) => order.orderStatus === 'COMPLETED')
+        .map((expense: any) => ({
             orderId: expense.orderNumber,
             orderType: 'P2P',
             seller: expense.counterPartNickName,
@@ -29,11 +29,12 @@ export const createExpense = async (url, query) => {
             total: expense.totalPrice,
         }));
     const API_KEY = 'ApiKey ' + process.env.API_KEY;
+
     try {
         await axios.post(
             `${HOST}/api/expenses/external/json`,
             { expenses },
-            { headers: { Authorization: API_KEY } }
+            { headers: { Authorization: API_KEY } },
         );
     } catch (error) {
         console.log(error?.response?.data?.message);
@@ -49,7 +50,7 @@ export const createEntries = async (url, query) => {
     const signature = generateSignature(query, process.env.BINANCE_SECRET_KEY);
     const request = await axios.get(
         `${HOST_BINANCE}/${url}?${query}&signature=${signature}`,
-        { headers: { 'X-MBX-APIKEY': process.env.BINANCE_API_KEY } }
+        { headers: { 'X-MBX-APIKEY': process.env.BINANCE_API_KEY } },
     );
     const entriesAndExpenses = request.data.data;
     const entries: Order[] = entriesAndExpenses
@@ -86,7 +87,7 @@ export const createEntries = async (url, query) => {
             await axios.post(
                 `${HOST}/api/expenses/external/json`,
                 { expenses },
-                { headers: { Authorization: API_KEY } }
+                { headers: { Authorization: API_KEY } },
             );
         } catch (error) {
             console.log(error?.response?.data?.message);
@@ -99,7 +100,7 @@ export const createEntries = async (url, query) => {
             await axios.post(
                 `${HOST}/api/entries/external/json`,
                 { entries },
-                { headers: { Authorization: API_KEY } }
+                { headers: { Authorization: API_KEY } },
             );
         } catch (error) {
             console.log(error?.response?.data?.message);
